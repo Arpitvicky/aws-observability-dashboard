@@ -41,16 +41,5 @@ aws configure --profile tracer-readonly
 # aws ec2 describe-instance-types --profile tracer-readonly --region eu-central-1 --max-results 5
 
 
-# In the real scenario (production), will get all metrics from 
-
-# Inventory → EC2
-
-# CPU → CloudWatch
-
-# RAM/GPU → CloudWatch Agent (+ NVIDIA/DCGM)
-
-# Uptime → LaunchTime (rough) or CE/CUR (accurate hours)
-
-# Cost → Pricing (list) or Cost Explorer/CUR (actual)
 
 
