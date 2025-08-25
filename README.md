@@ -20,19 +20,19 @@ It also has some commands from where we can get real time data from AWS
 
 # In the real scenario (production), will get all metrics from
 
-# Inventory → EC2
+### Inventory → EC2
 
-# CPU → CloudWatch
+### CPU → CloudWatch
 
-# RAM/GPU → CloudWatch Agent (+ NVIDIA/DCGM)
+### RAM/GPU → CloudWatch Agent (+ NVIDIA/DCGM)
 
-# Uptime → LaunchTime (rough) or CE/CUR (accurate hours)
+### Uptime → LaunchTime (rough) or CE/CUR (accurate hours)
 
-# Cost → Pricing (list) or Cost Explorer/CUR (actual)
-
+### Cost → Pricing (list) or Cost Explorer/CUR (actual)
 
 # Vercel deployment link
- 
+
+https://aws-observability-dashboard-beta.vercel.app/
 
 <!-- To get the real data via AWS SDK 
 
