@@ -34,3 +34,24 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+<!-- To get the real data via AWS SDK 
+
+pnpm add @aws-sdk/client-ec2 @aws-sdk/client-cloudwatch @aws-sdk/client-cost-explorer
+
+API design can be below to get inventory, metrics, cost and pricing
+
+"@aws-sdk/client-ec2"
+// app/api/instances/route.ts - inventory for the table
+{ id, name, region, instanceType, owner, jobId, launchTime }
+
+"@aws-sdk/client-cloudwatch"
+// app/api/metrics/route.ts — CPU (CloudWatch).
+RAM/GPU require CloudWatch Agent on the instance; here we just return CPU average for a range.
+Memory/GPU: once CW Agent is installed, query Namespace: "CWAgent" and metric names you publish (e.g., mem_used_percent, gpu_utilization) with similar code and merge lines on the same timestamps.
+
+@aws-sdk/client-cost-explorer"
+/app/api/costs/route.ts — daily spend + grouping (Cost Explorer)
+
+"@aws-sdk/client-cost-explorer"
+/app/api/kpis/route.ts
