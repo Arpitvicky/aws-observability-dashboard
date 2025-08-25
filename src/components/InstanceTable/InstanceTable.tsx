@@ -121,12 +121,12 @@ export function InstanceTable({
           Used only color bars to show utilisation for CPU/RAM/GPU not
           highlighting entire row
         </p>{" "}
-        Assumption— "waste" = avg utilisation (CPU/RAM/GPU)
+        Assumption— waste = avg utilisation (CPU/RAM/GPU)
         <p>Waste identifier: </p>
-        <p>"Underutilised" -- &lt;20% for &gt;24h uptime</p>
+        <p>Underutilised -- &lt;20% for &gt;24h uptime</p>
         <p>
-          "over-provisioned" -- low util + high $/h (assume threshold hourly to
-          be .40$
+          over-provisioned -- low util + high $/h (assume threshold hourly to be
+          .40$
         </p>
       </div>
     </div>

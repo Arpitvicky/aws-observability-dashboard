@@ -34,7 +34,7 @@ export default function CostAttribution({ costs }: { costs: CostEntry[] }) {
     const groups: Record<string, number> = {};
     // group by region initially
     for (const c of costs) {
-      const key = (c as any)[dim] ?? "unknown";
+      const key = c[dim] ?? "unknown";
       groups[key] = (groups[key] || 0) + c.amount;
     }
     console.log(groups);

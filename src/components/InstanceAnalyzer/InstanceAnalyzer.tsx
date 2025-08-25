@@ -26,22 +26,25 @@ export const InstanceAnalyzer = ({
   onClose: () => void;
 }) => {
   const [range, setRange] = useState<"1h" | "24h" | "7d">("24h");
-  if (!instance) return null;
 
-  const base24 = series[instance.id] || [];
+  const base24 = useMemo(
+    () => (instance ? series[instance.id] || [] : []),
+    [instance, series]
+  );
   const data = useMemo(() => {
+    const hasGpu = !!instance?.gpuAvg;
     if (range === "24h") return base24;
     if (range === "1h") {
       const seed = base24.at(-1) ?? {
         ts: new Date().toISOString(),
         cpu: 10,
         ram: 15,
-        gpu: instance.gpuAvg ? 10 : undefined,
+        gpu: hasGpu ? 10 : undefined,
       };
       return make1h(seed);
     }
     return make7d(base24);
-  }, [range, base24, instance.gpuAvg]);
+  }, [range, base24, instance?.gpuAvg]);
 
   const idleBandMax = 10; // <=10% = idle
 
@@ -56,6 +59,7 @@ export const InstanceAnalyzer = ({
     .filter((d) => d.cpu > 80 || d.ram > 80 || (d.gpu ?? 0) > 80)
     .slice(0, 5);
 
+  if (!instance) return null;
   return (
     <div className="fixed z-10 inset-y-0 right-0 w-[520px] bg-white border-l border-gray-300 p-4 overflow-auto">
       {/* Header */}
@@ -124,7 +128,7 @@ export const InstanceAnalyzer = ({
               <YAxis domain={[0, 100]} />
               <Tooltip
                 labelFormatter={(t) => formatTooltipLabel(t as number)}
-                formatter={(v: any, name) => [
+                formatter={(v: number, name) => [
                   `${Math.round(v as number)}%`,
                   name,
                 ]}
