@@ -5,35 +5,34 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 First, run the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
 pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Description
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This repository shows the dashboard from simulated EC2 instances data (metrics, cost, price), designed specifically for bioinformaticians and technical users who work with scientific workflows that rely on EC2 infrastructure.
 
-## Learn More
+/create-ec2-readonly-user.sh -- This file has the script to create an IAM user from admin AWS profile and
+provide read-only permission to AmazonEC2ReadOnlyAccess and also creating access and secret key.
+It also has some commands from where we can get real time data from AWS
 
-To learn more about Next.js, take a look at the following resources:
+# In the real scenario (production), will get all metrics from
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Inventory → EC2
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# CPU → CloudWatch
 
-## Deploy on Vercel
+# RAM/GPU → CloudWatch Agent (+ NVIDIA/DCGM)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Uptime → LaunchTime (rough) or CE/CUR (accurate hours)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Cost → Pricing (list) or Cost Explorer/CUR (actual)
+
+
+# Vercel deployment link
+ 
 
 <!-- To get the real data via AWS SDK 
 
