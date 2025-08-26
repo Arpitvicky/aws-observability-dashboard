@@ -26,40 +26,54 @@ export const FiltersBar = ({
   );
 
   return (
-    <div className="flex gap-2 my-3">
-      <h2>
-        <strong>Filters: </strong>
-      </h2>
-      <Select
-        label="Region"
-        value={value.region}
-        options={regions}
-        onChange={(v) => onChange({ ...value, region: v })}
-        showAllOption
-        allLabel="All regions"
-      />
-      <Select
-        label="Type"
-        value={value.instanceType}
-        options={types}
-        onChange={(v) => onChange({ ...value, instanceType: v })}
-        showAllOption
-        allLabel="All types"
-      />
-      <Select
-        label="Waste"
-        value={value.waste || "all"}
-        options={[
-          { value: "under", label: "Underutilized" },
-          { value: "low", label: "Low Util" },
-        ]}
-        onChange={(v) =>
-          onChange({ ...value, waste: (v ?? "all") as Filters["waste"] })
-        }
-        showAllOption
-        allLabel="All wastes"
-      />
-      <Button onClick={onReset}>Reset</Button>
+    <div className="my-3 w-full overflow-x-auto">
+      <div className="inline-flex items-end gap-2 whitespace-nowrap">
+        <h2 className="text-sm font-semibold shrink-0">
+          <strong>Filters:</strong>
+        </h2>
+
+        <div className="shrink-0">
+          <Select
+            label="Region"
+            value={value.region}
+            options={regions}
+            onChange={(v) => onChange({ ...value, region: v })}
+            showAllOption
+            allLabel="All regions"
+          />
+        </div>
+
+        <div className="shrink-0">
+          <Select
+            label="Type"
+            value={value.instanceType}
+            options={types}
+            onChange={(v) => onChange({ ...value, instanceType: v })}
+            showAllOption
+            allLabel="All types"
+          />
+        </div>
+
+        <div className="shrink-0">
+          <Select
+            label="Waste"
+            value={value.waste || "all"}
+            options={[
+              { value: "under", label: "Underutilized" },
+              { value: "low", label: "Low Util" },
+            ]}
+            onChange={(v) =>
+              onChange({ ...value, waste: (v ?? "all") as Filters["waste"] })
+            }
+            showAllOption
+            allLabel="All wastes"
+          />
+        </div>
+
+        <div className="shrink-0">
+          <Button onClick={onReset}>Reset</Button>
+        </div>
+      </div>
     </div>
   );
 };

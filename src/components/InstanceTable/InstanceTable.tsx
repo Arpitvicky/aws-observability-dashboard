@@ -50,71 +50,78 @@ export function InstanceTable({
           onChange={(v) => setSortBy((v as SortKey) ?? "cost")}
           showAllOption={false}
         />
+        <span className="ml-auto text-[10px] text-gray-500 block sm:hidden">
+          Swipe to see more
+        </span>
       </div>
-      <table className="w-full text-sm">
-        <thead>
-          <tr className="text-left">
-            <th className="px-2 py-2">Name/ID</th>
-            <th className="px-2 py-2">Region</th>
-            <th className="px-2 py-2">Type</th>
-            <th className="px-2 py-2">Uptime (h)</th>
-            <th className="px-2 py-2">CPU%</th>
-            <th className="px-2 py-2">RAM%</th>
-            <th className="px-2 py-2">GPU%</th>
-            <th className="px-2 py-2">$ / h</th>
-            <th className="px-2 py-2">Util avg</th>
-            <th className="px-2 py-2">Waste</th>
-          </tr>
-        </thead>
-        <tbody>
-          {sorted.map((i) => {
-            const badge = wasteBadge(i);
-            return (
-              <tr
-                key={i.id}
-                className="cursor-pointer hover:bg-gray-50"
-                onClick={() => onSelect(i)}
-              >
-                <td className="px-2 py-2">{i.id}</td>
-                <td className="px-2 py-2">{i.region}</td>
-                <td className="px-2 py-2">{i.instanceType}</td>
-                <td className="px-2 py-2">{i.uptimeHours}</td>
-                <td className="px-2 py-2">
-                  <UtilisationBar value={i.cpuAvg} />
-                </td>
-                <td className="px-2 py-2">
-                  <UtilisationBar value={i.ramAvg} />
-                </td>
-                <td className="px-2 py-2">
-                  {i.gpuAvg !== undefined ? (
-                    <UtilisationBar value={i.gpuAvg} />
-                  ) : (
-                    "-"
-                  )}
-                </td>
-                <td className="px-2 py-2">${i.hourlyCost.toFixed(3)}</td>
-                <td className="px-2 py-2">{avgUtil(i)}%</td>
-                <td className="px-2 py-2">
-                  <span
-                    className="text-gray-900 px-2 py-0.5 rounded-2xl text-xs font-medium"
-                    style={{ background: badge.color }}
-                  >
-                    {badge.label}
-                  </span>
+      <div className="w-full overflow-x-auto">
+        <table className="min-w-[960px] w-full text-sm whitespace-nowrap">
+          <thead>
+            <tr className="text-left">
+              <th className="px-2 py-2">Name/ID</th>
+              <th className="px-2 py-2">Region</th>
+              <th className="px-2 py-2">Type</th>
+              <th className="px-2 py-2">Uptime (h)</th>
+              <th className="px-2 py-2">CPU%</th>
+              <th className="px-2 py-2">RAM%</th>
+              <th className="px-2 py-2">GPU%</th>
+              <th className="px-2 py-2">$ / h</th>
+              <th className="px-2 py-2">Util avg</th>
+              <th className="px-2 py-2">Waste</th>
+            </tr>
+          </thead>
+          <tbody>
+            {sorted.map((i) => {
+              const badge = wasteBadge(i);
+              return (
+                <tr
+                  key={i.id}
+                  className="cursor-pointer hover:bg-gray-50"
+                  onClick={() => onSelect(i)}
+                >
+                  <td className="px-2 py-2">{i.id}</td>
+                  <td className="px-2 py-2">{i.region}</td>
+                  <td className="px-2 py-2">{i.instanceType}</td>
+                  <td className="px-2 py-2">{i.uptimeHours}</td>
+                  <td className="px-2 py-2">
+                    <UtilisationBar value={i.cpuAvg} />
+                  </td>
+                  <td className="px-2 py-2">
+                    <UtilisationBar value={i.ramAvg} />
+                  </td>
+                  <td className="px-2 py-2">
+                    {i.gpuAvg !== undefined ? (
+                      <UtilisationBar value={i.gpuAvg} />
+                    ) : (
+                      "-"
+                    )}
+                  </td>
+                  <td className="px-2 py-2">${i.hourlyCost.toFixed(3)}</td>
+                  <td className="px-2 py-2">{avgUtil(i)}%</td>
+                  <td className="px-2 py-2">
+                    <span
+                      className="text-gray-900 px-2 py-0.5 rounded-2xl text-xs font-medium"
+                      style={{ background: badge.color }}
+                    >
+                      {badge.label}
+                    </span>
+                  </td>
+                </tr>
+              );
+            })}
+            {!sorted.length && (
+              <tr>
+                <td
+                  colSpan={10}
+                  className="px-3 py-3 text-center text-gray-600"
+                >
+                  No instances match filters
                 </td>
               </tr>
-            );
-          })}
-          {!sorted.length && (
-            <tr>
-              <td colSpan={10} className="px-3 py-3 text-center text-gray-600">
-                No instances match filters
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
-
+            )}
+          </tbody>
+        </table>
+      </div>
       <div className="m-2 text-xs text-gray-600">
         <strong>Notes: Tradeoff</strong>
         <p>
